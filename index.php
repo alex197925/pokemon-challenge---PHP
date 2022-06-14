@@ -22,14 +22,18 @@ include("main.php");
 
                 <?php
 //                Api
-                $json = file_get_contents("https://pokeapi.co/api/v2/pokemon/");
+
+                $api_url = "https://pokeapi.co/api/v2/pokemon/";
+                $json = file_get_contents($api_url);
 //                Get data
-                $data = json_decode($json);
+                $data = json_decode($json,true);
                 var_dump($data);
                 ?>
+                <?php
+                if(isset($_POST['']))
+                ?>
 
-
-                <input placeholder="Search Here" class="text" type="text" name="pokemon-id" id="pokemon-id" />
+                <input method="post" placeholder="Search Here" class="text" type="text" name="pokemon-id" id="pokemon-id" />
                 <button type="button" id="run">Click</button>
             </div>
         </form>
