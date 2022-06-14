@@ -14,12 +14,21 @@
 <?php
 include("main.php");
 ?>
-
 <div class="container">
     <section class="material">
         <form action="#" method="post">
             <div class="field">
                 <h1>Search Pokemon!</h1>
+
+                <?php
+//                Api
+                $json = file_get_contents("https://pokeapi.co/api/v2/pokemon/");
+//                Get data
+                $data = json_decode($json);
+                var_dump($data);
+                ?>
+
+
                 <input placeholder="Search Here" class="text" type="text" name="pokemon-id" id="pokemon-id" />
                 <button type="button" id="run">Click</button>
             </div>
