@@ -11,44 +11,42 @@
     <title>Document</title>
 </head>
 <body>
-<?php
-include("main.php");
-?>
-<div class="container">
-    <section class="material">
-        <form action="#" method="post">
-            <div class="field">
-                <h1>Search Pokemon!</h1>
+
 
                 <?php
 //                Api
 
-                $api_url = "https://pokeapi.co/api/v2/pokemon/";
+                $api_url = "https://pokeapi.co/api/v2/pokemon/" . $_GET['name'];
                 $json = file_get_contents($api_url);
 //                Get data
-                $data = json_decode($json,true);
-                var_dump($data);
-                ?>
-                <?php
-                if(isset($_POST['']))
+                $data_res = json_decode($json,true);
+                var_dump($data_res);
+                $id = $data_res['id'];
+//                echo $id;echo "<br>";
+                $name = $data_res['forms']['0']['name'];
+//                echo $name; echo "<br>";
+                $image = $data_res['sprites']['front_default'];
                 ?>
 
-                <input method="post" placeholder="Search Here" class="text" type="text" name="pokemon-id" id="pokemon-id" />
-                <button type="button" id="run">Click</button>
-            </div>
-        </form>
-        <div class="data">
-            <span>Name: </span>
-            <h2 id="pokemon-name"></h2>
-            <span>ID: </span>
-            <h2 id="id"> </h2>
-            <span>Moves: </span>
-            <h2 id="moves"></h2>
+
+<div class="container">
+    <form action="#" method="GET">
+        <div class="field">
+            <h1>Search Pokemon!</h1>
+            <input placeholder="Search Here" class="text" type="text" name="name" id="pokemon-id" />
+            <button type="submit" id="btnNumbInput" value="submit">Click</button>
         </div>
-        <div class="card">
-            <div id="pokemon-img"></div>
+        <div class="info">
+            <h1><?php echo $name;?></h1>
+            <h3><?php echo $id;?></h3>
         </div>
-    </section>
+    </form>
+
+
+    <img src="<?php echo $image;?>">
 </div>
+
+
+
 </body>
 </html>
