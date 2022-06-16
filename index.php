@@ -23,19 +23,35 @@ if (isset($_GET['name'])) {
 //var_dump($data_res);
     $id = $data_res['id'];
     $pok_name = $data_res['forms']['0']['name'];
-    $pok_image = $data_res['sprites']['front_default'];
+    $pok_image = $data_res['sprites']['other']['home']['front_default'];
     if(!$pok_image) return;
     echo"<pre>";
-    $moves = $data_res['moves']['0']['move']['name'];
+    $pok_moves = $data_res['moves']['0']['move']['name'];;
+//    var_dump($pok_moves);
 }
 
 ?>
 
 
+
+<?php
+if (isset($_GET['name'])) {
+    if (count($data_res['moves']) > 1) {
+//        var_dump($data_res['moves']);
+        for ($i = 0; $i <= 4; $i++) {
+//            var_dump($i);
+            print_r($data_res['moves']['0']['move']['name']);
+        }
+    }elseif (count($data_res['moves']) === 1) {
+        print_r($data_res['moves']['0']['move']['name']);
+    }
+}
+?>
+
 <div class="container">
     <form action="#" method="GET">
         <div class="field">
-            <h1>Search Pokimon!</h1>
+            <h1>Search Pokemon!</h1>
             <input aria-label="" placeholder="Search Here" class="text" type="text" name="name" id="pokemon-id" />
             <button type="submit" id="btnNumbInput" value="submit">Click</button>
         </div>
@@ -57,6 +73,9 @@ if (isset($_GET['name'])) {
         if (isset($_GET['name'])) {
             echo $pok_image;
         }?>"
+
+<!--               Moves-->
+
 
 
 
