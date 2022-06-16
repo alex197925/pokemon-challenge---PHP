@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -13,37 +13,54 @@
 <body>
 
 
-                <?php
+<?php
 //                Api
-
-                $api_url = "https://pokeapi.co/api/v2/pokemon/" . $_GET['name'];
-                $json = file_get_contents($api_url);
+if (isset($_GET['name'])) {
+    $api_url = "https://pokeapi.co/api/v2/pokemon/" . $_GET['name'];
+    $json = file_get_contents($api_url);
 //                Get data
-                $data_res = json_decode($json,true);
-                var_dump($data_res);
-                $id = $data_res['id'];
-//                echo $id;echo "<br>";
-                $name = $data_res['forms']['0']['name'];
-//                echo $name; echo "<br>";
-                $image = $data_res['sprites']['front_default'];
-                ?>
+    $data_res = json_decode($json,true);
+//var_dump($data_res);
+    $id = $data_res['id'];
+    $pok_name = $data_res['forms']['0']['name'];
+    $pok_image = $data_res['sprites']['front_default'];
+    if(!$pok_image) return;
+    echo"<pre>";
+    $moves = $data_res['moves']['0']['move']['name'];
+}
+
+?>
 
 
 <div class="container">
     <form action="#" method="GET">
         <div class="field">
-            <h1>Search Pokemon!</h1>
-            <input placeholder="Search Here" class="text" type="text" name="name" id="pokemon-id" />
+            <h1>Search Pokimon!</h1>
+            <input aria-label="" placeholder="Search Here" class="text" type="text" name="name" id="pokemon-id" />
             <button type="submit" id="btnNumbInput" value="submit">Click</button>
         </div>
-        <div class="info">
-            <h1><?php echo $name;?></h1>
-            <h3><?php echo $id;?></h3>
-        </div>
     </form>
+        <h2> <?php
+            if (isset($_GET['name'])) {
+                echo $pok_name;
+            }
+            ?><br>
+        </h2>
+        <h2> <?php
+            if (isset($_GET['name'])) {
+                   echo $id;
+             }
+            ?><br>
+        </h2>
+
+          <img alt="pokemon" src ="<?php
+        if (isset($_GET['name'])) {
+            echo $pok_image;
+        }?>"
 
 
-    <img src="<?php echo $image;?>">
+
+
 </div>
 
 

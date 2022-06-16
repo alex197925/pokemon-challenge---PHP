@@ -11,7 +11,7 @@ body {
     background: rgb(34,193,195);
     background: linear-gradient(0deg, rgba(34,193,195,1) 63%, rgba(253,187,45,1) 100%);
     font-family: 'IBM Plex Sans KR', sans-serif;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
+
 }
 
 .container {
@@ -20,6 +20,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 h1  {
