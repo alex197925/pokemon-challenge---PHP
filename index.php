@@ -20,33 +20,19 @@ if (isset($_GET['name'])) {
     $json = file_get_contents($api_url);
 //                Get data
     $data_res = json_decode($json,true);
-//var_dump($data_res);
     $id = $data_res['id'];
     $pok_name = $data_res['forms']['0']['name'];
     $pok_image = $data_res['sprites']['other']['home']['front_default'];
     if(!$pok_image) return;
     echo"<pre>";
-    $pok_moves = $data_res['moves']['0']['move']['name'];;
-//    var_dump($pok_moves);
+    $pok_moves = $data_res['moves']['0']['move']['name'];
+//    Fetch species
+    $species_url = $data_res['species']['url'];
+    var_dump($species_url);
 }
 
 ?>
 
-
-
-<?php
-if (isset($_GET['name'])) {
-    if (count($data_res['moves']) > 1) {
-//        var_dump($data_res['moves']);
-        for ($i = 0; $i <= 4; $i++) {
-//            var_dump($i);
-            print_r($data_res['moves']['0']['move']['name']);
-        }
-    }elseif (count($data_res['moves']) === 1) {
-        print_r($data_res['moves']['0']['move']['name']);
-    }
-}
-?>
 
 <div class="container">
     <form action="#" method="GET">
@@ -75,14 +61,23 @@ if (isset($_GET['name'])) {
         }?>"
 
 <!--               Moves-->
-
+<h4> <?php
+    if (isset($_GET['name'])) {
+        if (count($data_res['moves']) > 1) {
+//        var_dump($data_res['moves']);
+            for ($i = 0; $i <= 4; $i++) {
+//            var_dump($i);
+                print_r($data_res['moves']['0']['move']['name']);
+            }
+        }elseif (count($data_res['moves']) === 1) {
+            print_r($data_res['moves']['0']['move']['name']);
+        }
+    }
+    ?></h4>
 
 
 
 
 </div>
-
-
-
 </body>
 </html>
